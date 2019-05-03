@@ -10,9 +10,12 @@ def xor_byte_strings(input_bytes1, input_bytes2):
 	#iterate through each char in each byte string
 	for b1, b2 in zip(input_bytes1, input_bytes2):
 		
-		#XORs the byte and adds it to the byte string
+		#XOR the byte then add it to the byte string
 		xord_bytes += (bytes([b1 ^ b2]))
+		
+		#print debugging 
 		print(xord_bytes)
+
 	return xord_bytes
 	
 def main():
