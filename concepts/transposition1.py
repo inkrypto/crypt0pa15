@@ -3,15 +3,15 @@
 import sys
 
 def main():
-	
+
 	if len(sys.argv) <= 1:
-		print("usage: needs string > 8 characters to encyrpt, no spaces")
+		print("usage: needs string to encyrpt, no spaces - './transposition.py cats'")
 		sys.exit(1)
 
 	my_message = sys.argv[1]
-	
-	#my_message = "Common sense not so common."
-	my_key = 8
+
+	#my_message = "this is a test message!"
+	my_key = 4 
 
 	ciphertext = encrypt_message(my_key, my_message)
 
