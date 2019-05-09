@@ -16,7 +16,7 @@ from __future__ import print_function
 
 a = '1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736'.decode('hex')
 
-#brute foreced every letter
+#brute forced every letter
 for x in range(0, len(a)):
 	print(chr(ord(a[x]) ^ ord('x')), end='')
 	
