@@ -1,6 +1,16 @@
-#usr/bin/python
+#!/usr/bin/python
 import sys
 import math
+
+def main():
+		
+	my_message = "F  cuybhcoi!kut"
+	my_key = 4 
+
+	plaintext = decrypt_message(my_key, my_message)
+
+	print(plaintext + "|")
+
 def decrypt_message(key, message):
 
 	#the number of columns
@@ -31,17 +41,3 @@ def decrypt_message(key, message):
 if __name__ == '__main__': main()
 
 
-def main():
-		
-	if len(sys.argv) <= 1:
-		print("usage: needs string to encyrpt, no spaces - './transposition.py cats'")
-		sys.exit(1)
-
-	my_message = sys.argv[1]
-	
-	#my_message = "F  cuybhcoi!kut"
-	my_key = 4 
-
-	plaintext = decrypt_message(my_key, my_message)
-
-	print(plaintext + "|")
