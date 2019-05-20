@@ -34,7 +34,7 @@ print('')
 
 
 # new algorithm
-#for ever char in the alphabet xor or the string with that alphabet letter as the key
+#for ever char in the alphabet xor the string with that alphabet letter as the key
 for key in string.ascii_lowercase:
 	print('running encrypt with key {}: '.format(key), end='')
 	for character in range(0, len(a)):

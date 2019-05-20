@@ -1,24 +1,24 @@
 #!/usr/bin/python
 
-'''
 import sys
 
 def main():
-
+	
+	'''
 	if len(sys.argv) <= 1:
 		print("usage: needs string to encyrpt, no spaces - './transposition.py cats'")
 		sys.exit(1)
 
 	my_message = sys.argv[1]
-
-	#my_message = "this is a test message!"
-	my_key = 4 
+	'''
+	my_message = "Happy Friday Kevin Matias Depak!"
+	my_key = 7 
 
 	ciphertext = encrypt_message(my_key, my_message)
 
 	#print encrypted with pipe in case their are spaces at the end, formatting.
 	print(ciphertext + "|")
-'''
+
 def encrypt_message(key, message):
 	#each string represents a column
 	ciphertext = [''] * key
@@ -38,6 +38,6 @@ def encrypt_message(key, message):
 	#convert ciphertext list into single string
 	return ''.join(ciphertext)
 
-#if __name__ == '__main__': main()
+if __name__ == '__main__': main()
 
 
