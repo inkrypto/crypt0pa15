@@ -5,10 +5,10 @@ import os, time, sys, encryptModule, decryptModule
 def main():
 	
 	frank = 'frank.encrypted.txt'
-	out_file = 'babba'
+	out_file = 'test'
 
 	my_key = 10
-	mode = 'decrypt' 
+	mode = 'encrypt' 
 
 	#if no input file, terminate
 	if not os.path.exists(frank):
@@ -16,13 +16,12 @@ def main():
 		sys.exit(1)
 
 	#if file exists, give user a chance to quit
-	'''
 	if os.path.exists(out_file):
 		print('this file will overwrite %s. (C)ontinue or (Q)uit?' % (out_file))
 		response =  raw_input('> ')
 		if not response.lower().startswith('c'):
 			sys.exit()
-	'''
+	
 	#read the message from input file
 	file_obj = open(frank)
 	content = file_obj.read()
