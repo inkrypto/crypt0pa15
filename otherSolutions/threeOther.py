@@ -9,14 +9,15 @@ b = a.decode('hex')
 c = string.ascii_lowercase
 d = {}
 
-print(a)
-print(b)
-print(c)
+print('a = {}\n'.format(a))
+print('b = {}\n'.format(b))
+print('c = {}\n'.format(c))
 
-counts=Counter(a)
+counts=Counter(b)
 for i in b:
-	print(i, counts[i], end='')
-
+	print('Character="{}", frequency[{}]'.format(i, counts[i], end=''))
+'''
 for x in range(0, len(b)):
 	for y in range(0, len(c)):
 		print(ord(b[x]) ^ ord(c[y]), end='')
+		'''
