@@ -4,30 +4,17 @@ from __future__ import print_function
 import string
 
 def charfreq(ciphertext):
+
+	frequency = {}
+	for i in range(0, len(ciphertext)):
+		if ciphertext[i] in frequency.keys():
+			frequency[ciphertext[i]] += 1
+		else:
+			frequency[ciphertext[i]] = 1
 	
-	frequencies = []
-	
-	for x in ciphertext:
-		frequencies.append({})
-		frequency = frequencies[-1]
-		for i in range(0, len(x)):
-			if x[i] in frequency.keys():
-				frequency[x[i]] += 1
-			else:
-				frequency[x[i]] = 1
-	#print('Characters = {}\n Frequency = {}'.format(repr(ciphertext[1]), frequencies[1], end=''))
-	print(frequency.values())
-
-	total_characters = len(ciphertext)
-	percentile = {}
-	high_percentile = {}
-
-	for i in frequency.keys():
-		percentile[i] = (frequency[i] / float(total_characters)) * 100
-		if percentile[i] > 1.0:
-			high_percentile = percentile[i]
-	print(high_percentile)
-
+	for i in frequency:
+		if frequency[i] > 100:
+			print(repr(i), frequency[i])
 
 def brentxor(ciphertext, key):
 	
@@ -54,7 +41,7 @@ def main():
 	#make file_obj list, 60 char stings for each index
 	cipherlist = map(''.join, zip(*[iter(a)]*60))	
 	
-	charfreq(cipherlist)
+	charfreq(a)
 	#print(brentxor(cipherlist, 'x'))
 
 if __name__ == '__main__':
@@ -64,3 +51,30 @@ if __name__ == '__main__':
 #this prints list into dict
 #alist = {i : cipherlist[i] for i in range(0, len(cipherlist))}
 
+'''
+	frequencies = []
+	
+	for x in ciphertext:
+		frequencies.append({})
+		frequency = frequencies[-1]
+		for i in range(0, len(x)):
+			if x[i] in frequency.keys():
+				frequency[x[i]] += 1
+			else:
+				frequency[x[i]] = 1
+	print('ciphertext is {}'.format(type(ciphertext)))
+	print('frequencies is {}'.format(type(frequencies)))
+	print('frequency is {}'.format(type(frequency)))
+
+	print('Characters = \n Frequency = {}'.format(frequencies, end=''))
+	
+	total_characters = len(ciphertext)
+	percentile = {}
+	high_percentile = {}
+
+	for i in frequency.keys():
+		percentile[i] = (frequency[i] / float(total_characters)) * 100
+		if percentile[i] > 1.0:
+			high_percentile = percentile[i]
+	#print(high_percentile)
+'''
