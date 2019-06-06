@@ -43,8 +43,8 @@ def main():
 		else:
 			cipherlist[-1] = cipherlist[-1] + a[i]
 		print('i = {}'.format(i))	
+
 	# algorithm that does the thing here, all the hard work is done.
-	
 	for line in cipherlist:
 		freq = charfreq(line) # get the dict for the freq analys
 		maxfreqnum = 0
@@ -63,11 +63,6 @@ if __name__ == '__main__':
 	main()
 
 '''
-assuming:
-A xor B = C
-A xor C = B
-C xor B = A
-
 	frequencies = []
 	
 	for x in ciphertext:

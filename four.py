@@ -17,18 +17,16 @@ with open('files/4.txt') as f:
 		temp += line.strip() 	# had to strip CRLF and newlines
 
 a = temp.decode('hex')			# hex to ascii
-print(type(a))
 freq = {}						# empty list to count char frequency
-
 for i in range(0, len(a)):
 	if a[i] in freq.keys():
 		freq[a[i]] += 1			# increment number of times char used
 	else:
 		freq[a[i]] = 1
-print(freq.values())
+
 for i in freq:
-	if freq[i] > 1:
-		print(i, freq[i])
+	if freq[i] >= 100:
+		print('key:{} frequency:{}'.format(repr(i), freq[i]))
 
 # writing this next bit to a file because easier to read
 solution = open('files/fourAnswer.txt', 'w')
