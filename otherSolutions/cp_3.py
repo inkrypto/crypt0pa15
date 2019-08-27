@@ -1,5 +1,6 @@
 #!/usr/bin/python
 import string
+import pdb
 '''
 The hex encoded string:
 
@@ -11,7 +12,7 @@ You can do this by hand. But don't: write code to do it for you.
 How? Devise some method for "scoring" a piece of English plaintext. Character frequency is a good metric. Evaluate each output and choose the one with the best score.
 '''
 
-ct = '1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736'.decode('hex')
+ciphertext = '1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736'.decode('hex')
 
 # https://www3.nd.edu/~busiforc/handouts/cryptography/letterfrequencies.html
 
@@ -23,57 +24,59 @@ given a plaintext:
 2. for each char in generated frequency accumulate a difference from english
 3. take the difference and subtract from 100, this is the score 
 '''
-def score_plain(s):
+def score_plain(strng):
 	global english_freq
 	generated_count = {}
 	generated_freq = {}
-	score_count = 0
-	for c in s.lower():
-		if c not in generated_count.keys():
-			generated_count[c] = 1
-			generated_freq[c] = (1/float(len(s))) * 100
+	score_count = 0						# penalize character frequency. garbage char=low score. english char=high score
+	for chrtr in strng.lower():
+		if chrtr not in generated_count.keys():
+			generated_count[chrtr] = 1
+			# use pdb here to see what this var is 
+			generated_freq[chrtr] = (1/float(len(strng))) * 100 #how he know to put this in here? not looping freq 
 		else:
-			generated_count[c] += 1
-			generated_freq[c] = (generated_count[c]/float(len(s))) * 100
-	for c in generated_freq.keys():
-		if c in english_freq.keys():
-			score_count += abs(english_freq[c] - generated_freq[c])
-		elif c in string.whitespace:
+			generated_count[chrtr] += 1
+			generated_freq[chrtr] = (generated_count[chrtr]/float(len(strng))) * 100
+	for chrtr in generated_freq.keys():
+		if chrtr in english_freq.keys():
+			score_count += abs(english_freq[chrtr] - generated_freq[chrtr])
+		elif chrtr in string.whitespace:
 			score_count += 1 
-		elif c in string.punctuation[0:7]:
+		elif chrtr in string.punctuation[0:7]:
 			score_count += 10 
-		elif c in string.printable:
+		elif chrtr in string.printable:
 			score_count += 15 
 		else:
 			score_count += 18 
-	return abs(1000 - score_count)
+	return abs(1000 - score_count) # why are we doing this? why subtracting from 1000
 		
-def xor(s,k):
-	r = ''
-	for c in s:
-		r += chr( ord(c) ^ ord(k) )
-	return r
+def brentxor(strng, key):
+	xor = ''
+	for chrtr in strng:
+		xor += chr( ord(chrtr) ^ ord(key) )
+	return xor
 
-def niceify(s):
-	ns = ''
-	for c in s:
-		if c in string.printable:
-			ns += c
+# pretty print function
+def niceify(strng):
+	newstring = ''
+	for chrtr in strng:
+		if chrtr in string.printable:
+			newstring += chrtr
 		else:
-			ns += '<' + c.encode('hex') + '>'
-	return ns
+			newstring += '<' + chrtr.encode('hex') + '>'
+	return newstring
 
 def main():
-	global ct
+	global cont
 	max_score = 0
 	max_string = ''
-	for k in range(0, 256):
-		key = chr(k)
-		s = xor(ct, key)
-		sc = score_plain(s)
-		if sc > max_score:
-			max_score = sc
-			max_string = s
+	for key in range(0, 255):					# loop through all ascii 
+		my_key = chr(key)						# key = each char looping through 0-255
+		strng = brentxor(ciphertext, my_key)		# store return of brentxor in s
+		score = score_plain(strng)					# store return of score plain if sc > max_score:
+		if score > max_score:
+			max_score = score					# update max score
+			max_string = strng					# update max string
 		#if sc > 900: print('key {} SCORE : score: {}, string: {}'.format(str(k),str(sc),niceify(s)))
 		#import pdb; pdb.set_trace()
 	print('FINAL : score: {}, string: {}'.format(str(max_score),niceify(max_string)))

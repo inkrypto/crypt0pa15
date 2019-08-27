@@ -4,6 +4,7 @@
 # Find it. 
 # (Your code from #3 should help.)
 
+from __future__ import print_function
 import string
 
 def charfreq(ciphertext):
@@ -43,12 +44,14 @@ def main():
 		if i % 60 == 0:					
 			cipherlist.append(a[i])
 		else:
-			cipherlist[-1] = cipherlist[-1] + a[i]
-	
+			cipherlist[-1] += a[i]
+	print(brentxor(cipherlist, 'x'))
+
 	# algorithm that takes each line in list, runs frequency, counts max char and times used then xor max char with 'assumed' plaintext char as the key
 	# A xor B = C
 	# B xor C = A
 	# A xor C = B
+	'''
 	for line in cipherlist:
 		freq = charfreq(line) # get the dict for the freq analys
 		maxfreqnum = 0
@@ -62,7 +65,7 @@ def main():
 		key = chr(ord(maxfreqchar) ^ ord(' '))
 		
 		# line is ciphertext, key is maxchar ^ assumption
-		print('key={} \n plaintext={}'.format(repr(key), brentxor(line, key)))
-
+		print('key={} \nplaintext={}'.format(repr(key), brentxor(line, key)))
+	'''
 if __name__ == '__main__':
 	main()

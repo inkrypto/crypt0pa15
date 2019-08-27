@@ -9,11 +9,11 @@ def score_plain(s):
         global english_freq
         generated_count = {}
         generated_freq = {}
-        score_count = 0 # penalize the distant between plaintext and english. the greater the distants the greater the penalty. garbage to have small score. english to have a high score. keep score of how 'englishness' a string is
+        score_count = 0 														# penalize the distant between plaintext and english. the greater the distants the greater the penalty. garbage to have small score. english to have a high score. keep score of how 'englishness' a string is
         for c in s.lower():
                 if c not in generated_count.keys():
                         generated_count[c] = 1
-                        generated_freq[c] = (1/float(len(s))) * 100 # what % of the character is used
+                        generated_freq[c] = (1/float(len(s))) * 100 			# what % of the character is used
                 else:
                         generated_count[c] += 1
                         generated_freq[c] = (generated_count[c]/float(len(s))) * 100
@@ -22,16 +22,15 @@ def score_plain(s):
                         score_count += abs(english_freq[c] - generated_freq[c]) # understand the distance of a given character in plaintext to the english frequency
                 elif c in string.whitespace:
                         score_count += 1
-                elif c in '!"&\'.:;?':  # adding the realistic uses of punctuation
+                elif c in '!"&\'.:;?':  										# adding the realistic uses of punctuation
                         score_count += 10
-                elif c in string.printable: # if not a used char then gets a higher penalty
+                elif c in string.printable: 									# if not a used char then gets a higher penalty
                         score_count += 15
                 else:
-                        score_count += 18 	# this definitely gets penalized
+                        score_count += 18 										# this definitely gets penalized
         return abs(1000 - score_count)
 
 def brentxor(ciphertext, key):
-	
 	plaintext = ''
 	for i in range(0, len(ciphertext)):
 		plaintext += (chr(ord(ciphertext[i])^ord(key)))	
@@ -47,14 +46,11 @@ def niceify(us):
 	return ns
 
 def main():
-	
 	file_obj = ''
-
+	ciphertext = file_obj.decode('hex')
 	with open('../files/4.txt') as f:
 		for line in f:
 			file_obj += line.strip() #strip because CRLF
-
-	ciphertext = file_obj.decode('hex')
 
 	# make file_obj list, 60 char stings for each index
 	cipherlist = []
@@ -67,12 +63,8 @@ def main():
 	#key = '5' 
 	#print(niceify(brentxor(cipherlist[85], key))) 
 	
-	for ndices in range(0, len(cipherlist)):
-		
-		s = brentxor(cipherlist[ndices], key)
-		print(niceify("ndx: {} plain: ".format(ndices) + brentxor(cipherlist[ndices],key))) # a print to use here
-	
-	print(score_plain(s))
+	for i in range(0, len(cipherlist)):
+		print(niceify("ndx: {} plain: ".format(ndices) + brentxor(cipherlist[i],key))) 	
 
 if __name__ == '__main__':
 	main()

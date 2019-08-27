@@ -1,15 +1,14 @@
 #!/usr/bin/python
 
-s1 = '1c0111001f010100061a024b53535009181c'
-s2 = '686974207468652062756c6c277320657965'
+def xor(s1, s2):
+	x = ''
+	for i in range(0, len(s1)):
+		x += (chr(ord(s1[i]) ^ ord(s2[i])))
+	return(x)
 
-a = s1.decode('hex')
-b = s2.decode('hex')
-
-#to get answer
-for x in range(0, len(a)):
-	print(hex(ord(a[x]) ^ ord(b[x])))
-
-#to get what answer is
-for x in range(0, len(a)):
-	print(chr(ord(a[x]) ^ ord(b[x])))
+if __name__ == '__main__': 
+	a = '1c0111001f010100061a024b53535009181c'
+	b = '686974207468652062756c6c277320657965'
+	s1 = a.decode('hex')
+	s2 = b.decode('hex')
+	print(xor(s1, s2))
