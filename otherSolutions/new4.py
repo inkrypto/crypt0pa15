@@ -5,18 +5,19 @@ One of the 60-character strings in this file has been encrypted by single-charac
 
 Find it.
 
-Your code from #3 should help.
+(Your code from #3 should help.)
 '''
 
 import string
 from xor import xor
 from score import score_text
 
-file_obj = ''
-cipherlist = []
-with open('files/4.txt') as f:
-	for line in f:
-		cipherlist.append(line.strip().decode('hex'))
+def main():
+	file_obj = ''
+	cipherlist = []
+	with open('files/4.txt') as f:
+		for line in f:
+			cipherlist.append(line.strip().decode('hex'))
 
 	max_score = 0
 	max_string = ''
@@ -29,5 +30,6 @@ with open('files/4.txt') as f:
 			if sc > max_score:
 				max_score = sc
 				max_string = x
-	print('Final score: {}, answer: {}'.format(str(max_score), max_string))
+	print('Final score: {}, string: {}'.format(str(max_score), max_string))
 
+if __name__ == '__main__': main()
