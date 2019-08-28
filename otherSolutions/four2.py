@@ -29,7 +29,7 @@ def main():
 	# empty string buffer for file
 	file_obj = ''
 
-	with open('files/4.txt') as f:
+	with open('../files/4.txt') as f:
 		for line in f:
 			file_obj += line.strip() #strip because CRLF
 
