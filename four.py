@@ -25,9 +25,9 @@ def main():
 		key = chr(k)
 		for i in cipherlist:
 			x = xor(i, key)
-			sc = score_text(x)
-			if sc > max_score:
-				max_score = sc
+			score_count = score_text(x)
+			if score_count > max_score:
+				max_score = score_count
 				max_string = x
 	print('Final score: {}, string: {}'.format(str(max_score), max_string))
 

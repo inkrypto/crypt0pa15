@@ -13,11 +13,13 @@ given plaintext:
 2. for each char accumulate a difference from english
 3. take the difference, that is the score
 '''
+
 def score(s):
 	global english_freq
 	generated_count = {}
 	generated_frequency = {}
 	score_count = 0
+	
 	# get the count and the frequency of the characters
 	for i in s.lower():
 		if i not in generated_count.keys():
@@ -26,6 +28,7 @@ def score(s):
 		else:
 			generated_count[i] += 1
 			generated_frequency[i] = generated_count[i]/float(len(s)) * 100
+	
 	# score the characters 
 	for i in generated_frequency.keys():
 		if i in english_frequencies.keys():
@@ -60,5 +63,3 @@ def main():
 	print('Score = {}, Answer = {}'.format(str(max_score), max_string))
 
 if __name__ == '__main__': main()
-
-	
