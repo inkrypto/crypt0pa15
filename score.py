@@ -23,7 +23,7 @@ def score_text(plaintext):
 			score += abs(english_freq[i] - generated_frequency[i])
 		elif i in string.whitespace:
 			score += 1
-		elif i in string.punctuation[0:7]:
+		elif i in '!&\'":;?,.': #string.punctuation[0:7]:
 			score += 10
 		elif i in string.printable:
 			score += 15

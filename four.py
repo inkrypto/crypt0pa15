@@ -13,7 +13,6 @@ from xor import xor
 from score import score_text
 
 def main():
-	file_obj = ''
 	cipherlist = []
 	with open('files/4.txt') as f:
 		for line in f:
